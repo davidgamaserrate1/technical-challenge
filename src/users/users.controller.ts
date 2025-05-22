@@ -49,13 +49,13 @@ export class UsersController {
   }
 
   @Put('update')
+  @UseGuards(JwtAuthGuard)
   async update( 
     @Request() req,
     @Body() body: { name?: string; email?: string; password?: string; active?: boolean }
   ) {
     try {
       const userId = req.user.id;
-      console.log('req.user.id', req.user.id)
       if (!userId) {
         throw new HttpException('Token inválido ou malformado: ID do usuário não encontrado', HttpStatus.UNAUTHORIZED);
       }
