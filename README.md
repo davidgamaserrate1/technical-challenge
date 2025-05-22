@@ -79,48 +79,76 @@ Authorization: Bearer <token>
 
 ### 📌 Users (protegido por JWT)
 
-| Método | Rota        | Descrição     |
-| ------ | ----------- | ------------- |
-| POST   | /users/create      | Criar usuário |
-| GET    | /users      | Listar todos  |
-| GET    | /users/\:id | Buscar por ID |
-| PUT    | /users/update/\:id | Atualizar     |
-| DELETE | /users/delete/\:id | Remover       |
+| Método | Rota          | Descrição                     |
+| ------ | ------------- | ----------------------------- |
+| POST   | /users/create | Criar novo usuário            |
+| GET    | /users        | Listar todos os usuários      |
+| GET    | /users/\:id   | Buscar usuário por ID         |
+| PUT    | /users/update | Atualizar usuário autenticado |
+| DELETE | /users/delete | Remover usuário autenticado   |
 
 ---
 
 ### 📌 Customers (protegido por JWT)
 
-| Método | Rota            | Descrição     |
-| ------ | --------------- | ------------- |
-| POST   | /customers      | Criar cliente |
-| GET    | /customers      | Listar todos  |
-| GET    | /customers/\:id | Buscar por ID |
-| PUT    | /customers/\:id | Atualizar     |
-| DELETE | /customers/\:id | Remover       |
+| Método | Rota                   | Descrição                |
+| ------ | ---------------------- | ------------------------ |
+| POST   | /customers/create      | Criar cliente            |
+| GET    | /customers             | Listar todos os clientes |
+| GET    | /customers/\:id        | Buscar cliente por ID    |
+| PUT    | /customers/update/\:id | Atualizar cliente        |
+| DELETE | /customers/delete/\:id | Remover cliente          |
 
 ---
 
 ### 📌 Sales (protegido por JWT)
 
-| Método | Rota        | Descrição     |
-| ------ | ----------- | ------------- |
-| POST   | /sales      | Criar pedido  |
-| GET    | /sales      | Listar todos  |
-| GET    | /sales/\:id | Buscar por ID |
-| PUT    | /sales/\:id | Atualizar     |
-| DELETE | /sales/\:id | Remover       |
+| Método | Rota                           | Descrição                       |
+| ------ | ------------------------------ | ------------------------------- |
+| POST   | /sales/create                  | Criar nova venda                |
+| GET    | /sales                         | Listar todas as vendas          |
+| GET    | /sales/\:id                    | Buscar venda por ID             |
+| GET    | /sales/customer/\:customer\_id | Vendas de um cliente específico |
+| GET    | /sales/user/\:user\_id         | Vendas de um usuário específico |
+| GET    | /sales/report?start=\&end=     | Relatório de vendas por período |
+| PUT    | /sales/update/\:id             | Atualizar venda                 |
+| DELETE | /sales/delete/\:id             | Remover venda                   |
 
 ---
 
 ### 📌 Auth
 
-| Método | Rota  | Descrição                |
-| ------ | ----- | ------------------------ |
-| POST   | /auth | Login e geração de token |
+| Método | Rota        | Descrição                |
+| ------ | ----------- | ------------------------ |
+| POST   | /auth/login | Login e geração de token |
+
+
 
 ---
 
+### ✅ Plus (Extras)
+
+* [x] **Atualizar usuário autenticado, sem precisar passar id do usuario na rota**
+
+  * `PUT /users/update`
+
+* [x] **Remover usuário autenticado, sem precisar passar id do usuario na rota**
+
+  * `DELETE /users/delete`
+
+* [x] **Buscar vendas por cliente**
+
+  * `GET /sales/customer/:customer_id`
+
+* [x] **Buscar vendas por usuário**
+
+  * `GET /sales/user/:user_id`
+
+* [x] **Relatório de vendas por período**
+
+  * `GET /sales/report?start=&end=`
+
+---
 ## 📍 Banco de Dados PostgreSQL
 
 Configure suas credenciais em um arquivo `.env`:
@@ -151,7 +179,7 @@ cd saibweb
 npm install
 ```
 
-3. Configure o `.env`
+3. Configure o `.env` (copiar o `.env.example`)
 
 4. Rode a aplicação
 
@@ -159,4 +187,24 @@ npm install
 npm run start:dev
 ```
 
+---
 
+### 📚 Documentação adicional
+
+Na raiz do projeto, há uma pasta chamada [`docs/`](./docs) contendo:
+
+* ✅ **Collection do Postman** pronta para uso com todas as rotas.
+* ✅ Documentação individual para os módulos:
+
+  * `auth`
+  * `users`
+  * `customers`
+  * `sales`
+
+Cada documento inclui:
+
+* 📌 Descrição das rotas
+* 🗄️ Especificação dos campos no banco de dados
+* 🔐 Requisitos de autenticação (quando aplicável)
+
+---
