@@ -6,9 +6,9 @@ services:
     container_name: postgres
     restart: always
     environment:
-      POSTGRES_USER: ${DB_USER}               # adiciona usuário se estiver usando no .env
+      POSTGRES_USER: ${DB_USER}                
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}                 # define o banco no startup
+      POSTGRES_DB: ${DB_NAME}                 
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     ports:
@@ -22,7 +22,7 @@ services:
     environment:
       - PORT=${PORT}
       - DB_HOST=${DB_HOST}                            
-      - DB_PORT=5432
+      - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
@@ -32,15 +32,3 @@ services:
       - db
     volumes:
       - ./src:/app/src
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: nest-pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
-    ports:
-      - '5050:80' 
-    depends_on:
-      - db
