@@ -164,29 +164,56 @@ JWT_EXPIRES_IN=3600s
 ```
 
 
-## ▶️ Como executar
+## ▶️ Como executar (docker)
 
 1. Clone o projeto
 
 ```bash
-git clone https://github.com/
-cd saibweb
+git clone https://github.com/davidgamaserrate1/technical-challenge.git
+cd technical-challenge
 ```
 
-2. Instale as dependências
+2. Configure o `.env` (copiar o `.env.example`)
+
+3. Rode a aplicação
+
+```bash
+docker compose up --build
+```
+
+4. Agora a aplicação está disponível na url `http://localhost:3000`
+
+---
+
+
+## ▶️ Como executar (via terminal, sem Docker)
+
+1. Clone o projeto
+
+```bash
+git clone https://github.com/davidgamaserrate1/technical-challenge.git
+cd technical-challenge
+```
+
+2. Configure o `.env` (copiar o `.env.example`)
+
+3. Instale as dependencias da aplicação
 
 ```bash
 npm install
 ```
 
-3. Configure o `.env` (copiar o `.env.example`)
-
-4. Rode a aplicação
+4. Instale as dependencias da aplicação
 
 ```bash
 npm run start:dev
 ```
 
+5. Agora a aplicação está disponível na url `http://localhost:3000`
+
+
+> ### obs para exeução local, sem docker : 
+> #### necessario configurar corretamente o banco de dados postgres (host, usuario, senha, database)
 ---
 
 ### 📚 Documentação adicional
