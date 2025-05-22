@@ -11,9 +11,11 @@ import {
   HttpStatus,
   UseGuards,
   Request,
+  Query,
 } from '@nestjs/common';
-import { SalesService } from './sales.service';  
-import { JwtAuthGuard } from 'src/auth/auth.guard';
+import { SalesService } from '../sales.service';  
+import { JwtAuthGuard } from 'src/modules/auth/guard/auth.guard';
+import { UpdateSaleDto } from '../dto/sales.dto';
 
 @Controller('sales')
 export class SalesController {
@@ -23,6 +25,24 @@ export class SalesController {
   @UseGuards(JwtAuthGuard)
   async findAll() {
     return this.salesService.findAll();
+  }
+
+  @Get('report')
+  @UseGuards(JwtAuthGuard)
+  async findSaleByPeriod(
+    @Query('start') start: string,
+    @Query('end') end: string
+  ) {
+    try {
+      if (!start || !end) {
+        throw new HttpException('Parâmetros "start" e "end" são obrigatórios',HttpStatus.BAD_REQUEST);
+      }
+
+      return await this.salesService.findSaleByPeriod(start, end);
+      
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+    }
   }
 
   @Get(':id')
@@ -35,7 +55,28 @@ export class SalesController {
     }
   }
 
-  @Post('create')
+  @Get('customer/:customer_id')
+  @UseGuards(JwtAuthGuard)
+  async findSaleByCustomerId(@Param('customer_id', ParseIntPipe) customer_id: number) {
+    try {
+      return await this.salesService.findSaleByCustomerId(customer_id);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+    }
+  }
+
+  @Get('user/:user_id')
+  @UseGuards(JwtAuthGuard)
+  async findSaleByUserId(@Param('user_id', ParseIntPipe) user_id: number) {
+    try {
+      return await this.salesService.findSaleByUserId(user_id);
+      
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+    }
+  }
+
+ @Post('create')
   @UseGuards(JwtAuthGuard)
   async create(
     @Request() req,
@@ -56,7 +97,7 @@ export class SalesController {
   @UseGuards(JwtAuthGuard)
   async update( 
     @Param('id', ParseIntPipe) id: number,
-    @Body() body: { date?: string; total_price?: number; customer_id: number; user_id: number; }
+    @Body() body: UpdateSaleDto
   ) {
     try {
       const customerId = id;

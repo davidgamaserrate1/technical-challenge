@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource } from 'typeorm';
-import { CustomerRepository } from './customer.respository';
+import { CustomerRepository } from './respository/customer.respository';
+import { CreateCustomerDto, UpdateCustomerDto } from './dto/customer.dto';
 
 @Injectable()
 export class CustomerService {
@@ -26,11 +27,11 @@ export class CustomerService {
     return await this.customerRepository.findByEmail(email);
   }
 
-  async create(data: { name: string; addres: string; city: string; state: string }) {
+  async create(data: CreateCustomerDto) {
     return await this.customerRepository.create(data);
   }
 
-  async update(id: number, data: { name?: string; addres?: string; city?: string; state?: string }) {
+  async update(id: number, data: UpdateCustomerDto) {
     const customer = await this.findOneById(id);
     if (!customer) throw new Error( 'Cliente não encontrado')
 

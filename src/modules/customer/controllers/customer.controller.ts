@@ -11,8 +11,9 @@ import {
   HttpStatus,
   UseGuards,
 } from '@nestjs/common';
-import { CustomerService } from './customer.service';
-import { JwtAuthGuard } from 'src/auth/auth.guard';
+import { CustomerService } from '../customer.service';
+import { JwtAuthGuard } from 'src/modules/auth/guard/auth.guard';
+import { CreateCustomerDto, UpdateCustomerDto } from '../dto/customer.dto';
 
 @Controller('customers')
 export class CustomerController {
@@ -35,7 +36,7 @@ export class CustomerController {
   }
 
   @Post('create')
-  async create(@Body() body: { name: string; addres: string; city: string; state: string }) {
+  async create(@Body() body: CreateCustomerDto) {
     try { 
         return await this.customerService.create(body);
     } catch (error) {
@@ -47,7 +48,7 @@ export class CustomerController {
   @UseGuards(JwtAuthGuard)
   async update( 
     @Param('id', ParseIntPipe) id: number,
-    @Body() body: { name?: string; addres?: string; city?: string; state?: string }
+    @Body() body: UpdateCustomerDto
   ) {
     try {
       const customerId = id;

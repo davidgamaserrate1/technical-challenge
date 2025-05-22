@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { join } from 'path';
-import { CustomerModule } from './customer/customer.module';
-import { SalesModule } from './sales/sales.module';
+import { CustomerModule } from './modules/customer/customer.module';
+import { SalesModule } from './modules/sales/sales.module';
 
 
 @Module({

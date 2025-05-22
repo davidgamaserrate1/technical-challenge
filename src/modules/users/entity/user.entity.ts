@@ -1,6 +1,6 @@
 // user.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Sale } from 'src/sales/sales.entity'; 
+import { Sale } from 'src/modules/sales/entity/sales.entity'; 
 
 @Entity('users')
 export class User {

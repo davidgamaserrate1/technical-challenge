@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { UserRepository } from './user.repository';
+import { UserRepository } from './respository/user.repository';
 
 @Injectable()
 export class UsersService {
@@ -13,7 +13,7 @@ export class UsersService {
   }
 
   async findAll() {
-    return this.userRepository.findAll();
+    return await this.userRepository.findAll();
   }
 
   async findOneById(id: number) {
