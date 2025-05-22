@@ -20,17 +20,13 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
+  @UseGuards(JwtAuthGuard)
   async findAll() {
     return this.usersService.findAll();
   }
 
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
-  }
-
-
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   async findOneById(@Param('id', ParseIntPipe) id: number) {
     try {
       return await this.usersService.findOneById(id);

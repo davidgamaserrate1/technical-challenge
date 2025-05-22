@@ -6,16 +6,16 @@ export class UserRepository {
   constructor(private dataSource: DataSource) {}
 
   async findAll() {
-    return this.dataSource.query(`SELECT id, name, email, active FROM users ORDER BY id`);
+    return this.dataSource.query(`SELECT id, name, email, password, active FROM users ORDER BY id DESC`);
   }
 
   async findOneById(id: number) {
-    const result = await this.dataSource.query(`SELECT * FROM users WHERE id = $1`, [id]);
+    const result = await this.dataSource.query(`SELECT id, name, email, password, active FROM users WHERE id = $1`, [id]);
     return result[0];
   }
 
   async findByEmail(email: string) {
-    const result = await this.dataSource.query(`SELECT * FROM users WHERE email = $1`, [email]);
+    const result = await this.dataSource.query(`SELECT id, name, email, password, active FROM users WHERE email = $1`, [email]);
     return result[0];
   }
 

@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { join } from 'path';
+import { CustomerModule } from './customer/customer.module';
 
 
 @Module({
@@ -28,7 +29,7 @@ import { join } from 'path';
     }),
     
     UsersModule, 
-    AuthModule
+    AuthModule, CustomerModule
   ],
     controllers: [AppController],
     providers: [AppService],

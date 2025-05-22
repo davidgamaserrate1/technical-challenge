@@ -12,6 +12,6 @@ export class AuthController {
     if (!user) {
       throw new UnauthorizedException('E-mail ou senha inválidos');
     }
-    return this.authService.login(user);
+    return await this.authService.login(user);
   }
 }
