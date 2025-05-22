@@ -151,10 +151,10 @@ Authorization: Bearer <token>
 ---
 ## 📍 Banco de Dados PostgreSQL
 
-Configure suas credenciais em um arquivo `.env`:
+Configure suas credenciais em um arquivo `.env` (copie o .env.example):
 
 ```
-DB_HOST=
+DB_HOST=db #para reconhecimento do docker
 DB_PORT=5432
 DB_USER=seu_usuario
 DB_PASSWORD=sua_senha
