@@ -127,7 +127,7 @@ Authorization: Bearer <token>
 ---
 
 ### ✅ Plus (Extras)
-* [x] **Criptografar senha do usuário**
+* [x] **Criptografar/descriptografar senha do usuário**
 * [x] **Atualizar usuário autenticado, sem precisar passar id do usuario na rota**
 
   * `PUT /users/update`
