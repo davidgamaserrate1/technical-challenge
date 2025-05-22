@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+// user.entity.ts
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Sale } from 'src/sales/sales.entity'; 
 
 @Entity('users')
 export class User {
@@ -16,4 +18,8 @@ export class User {
 
   @Column({ default: true })
   active: boolean;
+
+  // Um user pode registrar vários sales
+  @OneToMany(() => Sale, (sale) => sale.user)
+  sales: Sale[];
 }

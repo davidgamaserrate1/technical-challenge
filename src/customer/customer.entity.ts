@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+// customer.entity.ts
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Sale } from 'src/sales/sales.entity'; 
 
 @Entity('customers')
 export class Customer {
@@ -16,6 +18,8 @@ export class Customer {
 
   @Column({ length: 2 })
   state: string;
+
+  // Um customer pode ter vários sales
+  @OneToMany(() => Sale, (sale) => sale.customer)
+  sales: Sale[];
 }
-
-
